@@ -1,0 +1,29 @@
+# yaml file to lay out directions for how to build and run application
+
+# list current version of docker-compose
+version: "3.8"
+# list services you want the yaml file to execute
+services:
+    python:
+        build:
+            context: .
+        container_name: py
+        image: obiwankubernetes/py:1.0.0
+        ports:
+        - 5000:5000
+
+# cmds to get yaml file running docker
+# install docker for desktop (windows)
+# install docker compose (already built into docker desktop)
+# build process
+    # docker-compose build python
+# starting the app
+    # docker-compose up python
+# checking app works at defined port
+    # go to localhost:5000
+# signing into docker hub online
+    # docker login -u "username" -p "password" docker.io
+# push docker image to docker hub
+    # docker-compose push python
+
+

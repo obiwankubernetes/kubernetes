@@ -1,0 +1,54 @@
+# yaml file to define instrucitons/reqs for k8s deployment
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deploy
+  labels:
+    app: example-app
+  annotations:
+spec:
+  selector:
+    matchLabels:
+      app: example-app
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      containers:
+      - name: example-app
+        image: obiwankubernetes/py:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+
+# cmds to get kubernetes up and running
+# install kubectl
+    # dl on website or use curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/windows/amd64/kubectl.exe
+# put kubectl.exe in system enviroment path
+# check if kubectl working
+    # kubectl --help -> list off commands should show
+# turn k8s on in docker desketop
+    # check enable k8s box and then hit restart and apply
+# check if k8s enabled in docker are working
+    # kubectl get nodes -> docker-desktop should show under name
+# apply deployment.yaml in k8s directory
+    # kubectl apply -f .\kubernetes\deployments\deployment.yaml 
+    # should get confirmation that deployment created
+# check if deployment up and running
+    # kubectl get deploy to check deployments up and running
+    # kubectl get pods to check pods up and running

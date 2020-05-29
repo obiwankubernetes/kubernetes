@@ -1,0 +1,23 @@
+# to handle traffic, expose service, and load balance
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: example-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+
+# apply deployment.yaml in k8s directory
+    # kubectl apply -f .\kubernetes\services\service.yaml 
+    # should get confirmation that service created
+# check if service is up and running
+    # kubectl get svc
+    # should get confirm that cluster IP and loadbalancer up
+# check if app is running in k8s
+    # go to url "localhost" w/out port and should see "Hello Kubernetes"
